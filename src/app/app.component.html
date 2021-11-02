@@ -1,1 +1,3 @@
-<stn-product-display></stn-product-display>
+<stn-product-display
+  [product]="productParent" (priceChange)="onPriceChanged($event)">
+</stn-product-display>

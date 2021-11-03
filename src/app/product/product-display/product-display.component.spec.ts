@@ -33,6 +33,7 @@ describe('ProductDisplayComponent', () => {
 
     expect(oldVal).toBeLessThan(component.product.price);
   });
+
   it('should show name', () => {
     const nameElement = fixture.debugElement.query(By.css('.name'));
 

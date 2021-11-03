@@ -10,6 +10,11 @@ export class ProductDisplayComponent implements OnInit {
   @Input() product!: Product;
   @Output() priceChange = new EventEmitter<number>();
 
+  styleConfig = {
+    borderStyle: 'dashed',
+  }
+  showWeight = true;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +23,15 @@ export class ProductDisplayComponent implements OnInit {
   raisePrice() {
     this.product.price += 5;
     this.priceChange.emit(this.product.price);
+  }
+
+  changePrice(price: string) {
+    this.product.price = Number(price);
+    this.priceChange.emit(this.product.price);
+  }
+
+  toggleWeight() {
+    this.showWeight = !this.showWeight;
   }
 
 }

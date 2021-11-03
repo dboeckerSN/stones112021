@@ -3,7 +3,10 @@
   <ul>
     <li>ID: {{product.id}}</li>
     <li class="name">Name: {{product.name}}</li>
-    <li>Preis: {{product.price}}</li>
+    <li>Preis: {{product.price | currency}}</li>
+    <li>Preis Netto: {{product.price | netto | currency:"€" }}</li>
+    <li>Preis Netto 16%: {{product.price | netto:16 | currency:"€" }}</li>
+    <li>Preis Brutto 16%: {{product.price | netto:16:"brutto" | currency:"€" }}</li>
     <li *ngIf="showWeight">Gewicht: {{product.weight}}</li>
     <li [hidden]="showWeight">Gewicht (hidden): {{product.weight}}</li>
   </ul>

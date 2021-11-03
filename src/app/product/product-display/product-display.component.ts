@@ -13,6 +13,7 @@ export class ProductDisplayComponent implements OnInit {
   styleConfig = {
     borderStyle: 'dashed',
   }
+
   showWeight = true;
 
   constructor() { }

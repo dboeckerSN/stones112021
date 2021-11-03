@@ -10,8 +10,8 @@
     <li *ngIf="showWeight">Gewicht: {{product.weight}}</li>
     <li [hidden]="showWeight">Gewicht (hidden): {{product.weight}}</li>
   </ul>
-  <button (click)="raisePrice()">Preis erhöhen</button>
+  <button mat-raised-button color="primary" (click)="raisePrice()">Preis erhöhen</button>
   <br> <input type="number" #price />
-  <br><button (click)="changePrice(price.value)">Preis</button>
-  <br><button (click)="toggleWeight()">Toggle weight</button>
+  <br><button mat-raised-button color="primary" (click)="changePrice(price.value)">Preis</button>
+  <br><button mat-raised-button (click)="toggleWeight()">Toggle weight</button>
 </div>

@@ -15,7 +15,7 @@ describe('NettoPipe', () => {
     expect(pipe.transform(price, tax, 'brutto')).toBeCloseTo(220);
   });
 
-  it('calculates netto with tax 16 if no tax and no type is passed', () => {
+  it('calculates netto with tax 19 if no tax and no type is passed', () => {
     const price = 119;
     expect(pipe.transform(price)).toBe(100);
   });

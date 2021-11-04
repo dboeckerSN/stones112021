@@ -1,0 +1,13 @@
+<form [formGroup]="productForm">
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Preis" formControlName="price">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Gewicht" formControlName="weight">
+  </mat-form-field>
+  <button color="accent" mat-raised-button (click)="saveProduct()">speichern</button>
+</form>
+{{productForm.value | json}}

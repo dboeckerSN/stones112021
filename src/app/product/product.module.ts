@@ -5,20 +5,29 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductDisplayComponent } from './product-display/product-display.component';
 import { UtilsModule } from '../utils/utils.module';
 import {MatButtonModule} from '@angular/material/button';
+import { ProductFormComponent } from './product-form/product-form.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    ProductDisplayComponent
+    ProductDisplayComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,
     ProductRoutingModule,
     UtilsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   exports: [
-    ProductDisplayComponent
+    ProductDisplayComponent,
+    ProductFormComponent
   ]
 })
 export class ProductModule { }

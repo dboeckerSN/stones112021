@@ -58,4 +58,8 @@ export class AppComponent {
     alert("Neuer Preis: " + price);
   }
 
+  onProductAdd(newProd: Product) {
+    this.products.unshift(newProd);
+  }
+
 }

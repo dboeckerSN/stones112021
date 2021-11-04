@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NettoPipe } from './netto.pipe';
+import { NettoPipe } from './pipes/netto.pipe';
 
 
 

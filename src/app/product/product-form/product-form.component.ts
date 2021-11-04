@@ -1,6 +1,8 @@
+import { compileDeclareNgModuleFromMetadata } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from 'src/app/utils/custom-validators';
+import { ActivatedRoute } from '@angular/router';
+import { CustomValidators } from 'src/app/utils/validators/custom-validators';
 import { Product } from '../product';
 
 @Component({
@@ -10,12 +12,20 @@ import { Product } from '../product';
 })
 export class ProductFormComponent implements OnInit {
   @Output() productAdd = new EventEmitter<Product>();
+  id = 0;
 
   productForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
   ) {
+    this.route.paramMap.subscribe(paramMap => {
+      const id = Number(paramMap.get('id'));
+      if (id) {
+        this.id = id;
+      }
+   });
     this.productForm = fb.group({
       name: ['', [Validators.required, CustomValidators.alphaNum]],
       price: ['', [CustomValidators.positiv]],
@@ -28,22 +38,20 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct() {
     if(this.productForm.valid) {
-      this.productAdd.emit({id: 1 , ...this.productForm.value});
+      // this.productAdd.emit({id: this.id , ...this.productForm.value});
+      const product = {id: this.id , ...this.productForm.value}
+      this.productForm.reset();
+      alert('Neues Produkt: ' + JSON.stringify(product))
     }
-    /*
-    this.saveProduct.emit({
-      0,
-      this.productForm.value.name,
-      this.productForm.value.price,
-      this.productForm.value.weight,
-    });
-    //*
-    this.saveProduct.emit({
-      id: 1,
-      name: this.productForm.get('name').value,
-      price: this.productForm.get('price').value,
-      weight: this.productForm.get('weight').value,
-    });*/
+  }
+
+  isSaved(): boolean {
+    const formValue = this.productForm.value;
+    if(!formValue.name && !formValue.price && !formValue.weight) {
+      return true;
+    } else {
+      return confirm('Sie haben ungespeicherte Einträge. Wollen Sie wirklich fortfahren?');
+    }
   }
 
 }

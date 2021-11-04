@@ -1,10 +1,7 @@
 <mat-toolbar color="primary">
   <span>Stones</span>
+    <a [routerLink]="['/products']">Produktliste</a>
+    <a [routerLink]="['/products/new']">Neues Produkt anlegen</a>
 </mat-toolbar>
 {{today | date:'dd.MM.yy'}}
-<stn-product-form (productAdd)="onProductAdd($event)"></stn-product-form>
-<mat-card *ngFor="let prod of products; let isOdd = odd" [ngClass]="{'grey-background' : isOdd}">
-  <stn-product-display
-    [product]="prod" (priceChange)="onPriceChanged($event)">
-  </stn-product-display>
-</mat-card>
+<router-outlet></router-outlet>

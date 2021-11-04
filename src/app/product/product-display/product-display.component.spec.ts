@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NettoPipe } from 'src/app/utils/netto.pipe';
+import { NettoPipe } from 'src/app/utils/pipes/netto.pipe';
 import { Product } from '../product';
 
 import { ProductDisplayComponent } from './product-display.component';

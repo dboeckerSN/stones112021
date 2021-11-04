@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/utils/validators/custom-validators';
 import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'stn-product-form',
@@ -11,7 +12,6 @@ import { Product } from '../product';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-  @Output() productAdd = new EventEmitter<Product>();
   id = 0;
 
   productForm!: FormGroup;
@@ -19,6 +19,7 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private productService: ProductService,
   ) {
     this.route.paramMap.subscribe(paramMap => {
       const id = Number(paramMap.get('id'));
@@ -40,8 +41,8 @@ export class ProductFormComponent implements OnInit {
     if(this.productForm.valid) {
       // this.productAdd.emit({id: this.id , ...this.productForm.value});
       const product = {id: this.id , ...this.productForm.value}
+      this.productService.newProduct(product);
       this.productForm.reset();
-      alert('Neues Produkt: ' + JSON.stringify(product))
     }
   }
 

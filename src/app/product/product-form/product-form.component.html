@@ -1,13 +1,16 @@
 <form [formGroup]="productForm">
   <mat-form-field>
     <input matInput placeholder="Name" formControlName="name">
+    <mat-error *ngIf="productForm.get('name')?.hasError('required')">Plichtangabe!</mat-error>
+    <mat-error *ngIf="productForm.get('name')?.hasError('alphaNum')">Nur Alphanummerische Werte erlaubt!</mat-error>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Preis" formControlName="price">
+    <mat-error *ngIf="productForm.get('price')?.hasError('positiv')">Preis muss größer 0 sein!</mat-error>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Gewicht" formControlName="weight">
   </mat-form-field>
-  <button color="accent" mat-raised-button (click)="saveProduct()">speichern</button>
+  <button [disabled]="productForm.invalid" color="accent" mat-raised-button (click)="saveProduct()">speichern</button>
 </form>
 {{productForm.value | json}}

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from 'src/app/utils/custom-validators';
 import { Product } from '../product';
 
 @Component({
@@ -16,8 +17,8 @@ export class ProductFormComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.productForm = fb.group({
-      name: [''],
-      price: [''],
+      name: ['', [Validators.required, CustomValidators.alphaNum]],
+      price: ['', [CustomValidators.positiv]],
       weight: [''],
     })
    }
@@ -26,7 +27,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   saveProduct() {
-    this.productAdd.emit({id: 1 , ...this.productForm.value});
+    if(this.productForm.valid) {
+      this.productAdd.emit({id: 1 , ...this.productForm.value});
+    }
     /*
     this.saveProduct.emit({
       0,

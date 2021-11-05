@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/utils/validators/custom-validators';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'stn-product-form',
@@ -13,6 +14,8 @@ import { ProductService } from '../product.service';
 })
 export class ProductFormComponent implements OnInit {
   id = 0;
+  nameReversed = '';
+  nameLength = 0;
 
   productForm!: FormGroup;
 
@@ -31,7 +34,15 @@ export class ProductFormComponent implements OnInit {
       name: ['', [Validators.required, CustomValidators.alphaNum]],
       price: ['', [CustomValidators.positiv]],
       weight: [''],
-    })
+    });
+
+    this.productForm.get('name')?.valueChanges.pipe(
+      map(value => value.split('').reverse().join(''))
+    ).subscribe((reversedName: string) => this.nameReversed = reversedName);
+
+    this.productForm.get('name')?.valueChanges.subscribe(
+      data => this.nameLength = data.length,
+    );
    }
 
   ngOnInit(): void {

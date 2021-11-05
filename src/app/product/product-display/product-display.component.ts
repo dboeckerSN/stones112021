@@ -26,11 +26,6 @@ export class ProductDisplayComponent implements OnInit {
     this.priceChange.emit(this.product.price);
   }
 
-  changePrice(price: string) {
-    this.product.price = Number(price);
-    this.priceChange.emit(this.product.price);
-  }
-
   toggleWeight() {
     this.showWeight = !this.showWeight;
   }

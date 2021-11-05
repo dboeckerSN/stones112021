@@ -6,10 +6,7 @@
     <li>Preis: {{product.price | currency}}</li>
     <li>Preis Netto: {{product.price | netto | currency:"€" }}</li>
     <li *ngIf="showWeight">Gewicht: {{product.weight}}</li>
-    <li [hidden]="showWeight">Gewicht (hidden): {{product.weight}}</li>
   </ul>
   <button mat-raised-button color="primary" (click)="raisePrice()">Preis erhöhen</button>
-  <br> <input type="number" #price />
-  <br><button mat-raised-button color="primary" (click)="changePrice(price.value)">Preis</button>
   <br><button mat-raised-button (click)="toggleWeight()">Toggle weight</button>
 </div>

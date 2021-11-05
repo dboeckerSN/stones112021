@@ -13,4 +13,7 @@
   </mat-form-field>
   <button [disabled]="productForm.invalid" color="accent" mat-raised-button (click)="saveProduct()">speichern</button>
 </form>
-{{productForm.value | json}}<br>ID: {{id}}
+{{productForm.value | json}}
+<br>ID: {{id}}
+<br>Eman:{{nameReversed}}
+<br>{{nameLength}}

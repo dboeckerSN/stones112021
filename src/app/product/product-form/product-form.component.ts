@@ -40,7 +40,7 @@ export class ProductFormComponent implements OnInit {
       map(value => value.split('').reverse().join(''))
     ).subscribe((reversedName: string) => this.nameReversed = reversedName);
 
-    this.productForm.get('name')?.valueChanges.subscribe(
+    this.productForm.get('name')!.valueChanges.subscribe(
       data => this.nameLength = data.length,
     );
    }
@@ -50,10 +50,12 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct() {
     if(this.productForm.valid) {
-      // this.productAdd.emit({id: this.id , ...this.productForm.value});
-      const product = {id: this.id , ...this.productForm.value}
-      this.productService.newProduct(product);
-      this.productForm.reset();
+      const product = this.productForm.value;
+      this.productService.newProduct(product).subscribe(
+        () => this.productForm.reset(),
+        (error) => alert('Est ist ein Fehler aufgetreten' + error),
+      );
+
     }
   }
 

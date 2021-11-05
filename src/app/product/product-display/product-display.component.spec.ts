@@ -19,7 +19,7 @@ describe('ProductDisplayComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductDisplayComponent);
     component = fixture.componentInstance;
-    component.product = new Product(1, 'Grabstein Marmor', 123.56, 12);
+    component.product = new Product('Grabstein Marmor', 123.56, 12, 1);
     fixture.detectChanges();
   });
 

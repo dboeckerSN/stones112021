@@ -1,74 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Product } from './product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  baseApi = 'http://10.10.2.47:3000/';
 
-  products: Product[] = [
-    {
-      id: 0,
-      name: 'nisi elit',
-      price: 85.59,
-      weight: 22
-    },
-    {
-      id: 1,
-      name: 'pariatur aliquip',
-      price: 122.39,
-      weight: 21
-    },
-    {
-      id: 2,
-      name: 'nulla cillum',
-      price: 151.49,
-      weight: 20
-    },
-    {
-      id: 3,
-      name: 'id exercitation',
-      price: 128.45,
-      weight: 23
-    },
-    {
-      id: 4,
-      name: 'commodo minim',
-      price: 111.34,
-      weight: 21
-    },
-    {
-      id: 5,
-      name: 'duis tempor',
-      price: 164.61,
-      weight: 24
-    },
-    {
-      id: 6,
-      name: 'excepteur nostrud',
-      price: 71.62,
-      weight: 38
-    }
-  ];
+  constructor(
+    private http: HttpClient,
+  ) { }
 
-
-  constructor() { }
-
-  getList(): Product[] {
-    return this.products;
+  getList(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseApi + 'products');
   }
 
-  newProduct(newProd: Product): void {
-    this.products.unshift(newProd);
+  newProduct(newProd: Product): Observable<any> {
+    return this.http.post(this.baseApi + 'products', newProd);
   }
 }
 
 export class MockProductService {
-  getList(): Product[] {
-    return [
-      new Product(0, 'test', 1, 2),
-      new Product(1, 'test1', 2, 3),
-    ];
+  getList(): Observable<Product[]> {
+    return of([
+      new Product('test', 1, 2, 0),
+      new Product('test1', 2, 3, 0),
+    ]);
   }
 
   newProduct(product: Product): void {

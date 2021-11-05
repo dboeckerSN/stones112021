@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Product } from './product';
 
@@ -7,7 +8,9 @@ describe('ProductService', () => {
   let service: ProductService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
     service = TestBed.inject(ProductService);
   });
 
@@ -15,11 +18,4 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add passed in product to product list', () => {
-    const product = new Product(1, 'name', 111, 122);
-
-    service.newProduct(product);
-
-    expect(service.getList()[0]).toEqual(product);
-  });
 });
